@@ -4,7 +4,7 @@ const titleCount = document.getElementById('titleCount');
 let counter = 0;
 const cardContainer = document.getElementById('cardContainer');
 
-const loadAllPost = async() => {
+const loadAllPost = async(search) => {
     const response = await fetch('https://openapi.programming-hero.com/api/retro-forum/posts')
     const allData = await response.json();
     const data = allData.posts;
@@ -16,6 +16,7 @@ loadAllPost();
 
 const showAllPost = (data) => {
     data.forEach((item)=>{
+        
         const div = document.createElement('div')
         div.className = `lg:w-[700px]`
         div.innerHTML = `
@@ -107,3 +108,46 @@ const loadLatestPost = async() => {
 
 
 loadLatestPost()
+
+
+
+
+
+
+
+
+
+
+
+
+
+const inputBox = document.getElementById('inputBox');
+const searchBtn = document.getElementById('searchBtn');
+const loader = document.getElementById('loader');
+
+searchBtn.addEventListener('click', () => {
+    const inputValue = inputBox.value;
+    setTimeout(function(){
+        loadByCategory(inputValue);
+    }, 2000)
+    loader.classList.remove('hidden')
+    inputBox.value = '';
+    
+})
+
+
+
+const loadByCategory = async(searchText) => {
+    const response = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`)
+    const allData = await response.json();
+    const data = allData.posts;
+    itemContainer.textContent = '';
+    showAllPost(data)
+    loader.classList.add('hidden')
+    
+}
+
+
+
+
+

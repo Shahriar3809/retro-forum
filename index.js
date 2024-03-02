@@ -2,9 +2,7 @@ const itemContainer = document.getElementById('itemContainer');
 const tileContainer = document.getElementById('tileContainer');
 const titleCount = document.getElementById('titleCount');
 let counter = 0;
-
-
-
+const cardContainer = document.getElementById('cardContainer');
 
 const loadAllPost = async() => {
     const response = await fetch('https://openapi.programming-hero.com/api/retro-forum/posts')
@@ -13,15 +11,11 @@ const loadAllPost = async() => {
     // console.log(data)
 
     showAllPost(data);
-
 }
-
 loadAllPost();
-
 
 const showAllPost = (data) => {
     data.forEach((item)=>{
-        console.log(item)
         const div = document.createElement('div')
         div.className = `lg:w-[700px]`
         div.innerHTML = `
@@ -56,12 +50,9 @@ const showAllPost = (data) => {
         `;
 
         itemContainer.appendChild(div);
-
     })
+    
 }
-
-
-
 
 const readPost = (title, view) => {
     // console.log(title, view)
@@ -79,3 +70,40 @@ const readPost = (title, view) => {
     titleCount.innerText = counter;
 
 }
+
+const loadLatestPost = async() => {
+    const response = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts');
+    const data = await response.json();
+    data.forEach((card) => {
+        // console.log(card)
+
+        const div = document.createElement('div');
+        div.innerHTML = `<div class="card max-w-96 bg-base-100 shadow-xl">
+                        <figure class="px-3 pt-3">
+                            <img src="${card.cover_image}" />
+                        </figure>
+                        <div class="card-body space-y-2 p-3">
+                            <div class="flex gap-3 items-center">
+                                <i class="fa-solid fa-calendar-check"></i>
+                                <p class="font-semibold">${card.author.posted_date?card.author.posted_date:'No publish date'}</p>
+                            </div>
+                            <h1 class="text-2xl font-bold">${card.title}</h1>
+                            <p class="font-semibold text-gray-500">${card.description}</p>
+                            <div class="flex gap-4">
+                                <div>
+                                    <img class="w-10 rounded-full"  src="${card.profile_image}" alt="">
+                                </div>
+                                <div>
+                                    <p class="font-bold text-xl">${card.author.name}</p>
+                                    <p class="text-gray-400">${card.author.designation?card.author.designation:'Unknown'}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+
+        cardContainer.appendChild(div);
+    })
+}
+
+
+loadLatestPost()

@@ -12,7 +12,13 @@ const loadAllPost = async(search) => {
 
     showAllPost(data);
 }
-loadAllPost();
+
+
+setTimeout(()=>{
+    loadAllPost();
+    loader.classList.add('hidden')
+}, 2000)
+
 
 const showAllPost = (data) => {
     data.forEach((item)=>{

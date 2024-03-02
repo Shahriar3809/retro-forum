@@ -21,12 +21,13 @@ loadAllPost();
 
 const showAllPost = (data) => {
     data.forEach((item)=>{
-        
+        console.log(item)
         const div = document.createElement('div')
+        div.className = `lg:w-[700px]`
         div.innerHTML = `
-            <div id="item" class="flex flex-col lg:flex-row gap-5 border-gray-300  bg-gray-100 p-5 rounded-2xl border-2">
+            <div id="item" class="flex lg:max-w-[650px] flex-col lg:flex-row gap-5 border-gray-300  bg-gray-100 p-5 rounded-2xl border-2">
                     <div class="indicator ">
-                            <span class="indicator-item badge bg-green-500 badge-secondary border-2 border-white"></span>
+                            <span class="indicator-item badge  ${item.isActive? 'bg-green-500':'bg-red-600'} badge-secondary border-2 border-white"></span>
                             <div class="grid w-32 h-32 bg-base-300 place-items-center rounded-xl">
                                 <img src="${item.image}" alt="" >
                             </div>
@@ -63,9 +64,10 @@ const showAllPost = (data) => {
 
 
 const readPost = (title, view) => {
-    console.log(title, view)
+    // console.log(title, view)
     const div = document.createElement('div');
-    div.innerHTML = `<div class="flex gap-5 border-gray-300 bg-gray-100 border-2 rounded-lg p-2">
+    div.className = 'lg:max-w-[400px]'
+    div.innerHTML = `<div class="flex gap-5 lg:max-w-[400px] border-gray-300 bg-gray-50 border-2 rounded-lg p-2">
                         <p class="font-bold">${title}</p>
                         <div class="flex gap-3 items-center font-semibold">
                             <i class="fa-regular fa-eye"></i> 

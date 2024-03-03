@@ -109,15 +109,18 @@ const loadLatestPost = async() => {
                     </div>`
 
         cardContainer.appendChild(div);
+        loader2.classList.add('hidden')
     })
 }
 
 
+
+setTimeout(()=>{
+    
 loadLatestPost()
 
 
-
-
+}, 2000)
 
 
 
@@ -130,6 +133,7 @@ loadLatestPost()
 const inputBox = document.getElementById('inputBox');
 const searchBtn = document.getElementById('searchBtn');
 const loader = document.getElementById('loader');
+const loader2 = document.getElementById('loader2');
 
 searchBtn.addEventListener('click', () => {
     const inputValue = inputBox.value;

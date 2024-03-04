@@ -48,7 +48,7 @@ const showAllPost = (data) => {
                                 <div><i class="fa-regular fa-clock"></i> <span>${item.posted_time} min</span></div>
                             </div>
                             
-                            <div onclick="readPost('${item.title}', '${item.view_count}')" class="cursor-pointer">
+                            <div onclick="readPost('${item.title.replace("'", "")}', '${item.view_count}')" class="cursor-pointer">
                                 <i class="fa-solid fa-envelope-open bg-green-500 text-white rounded-full p-2 "></i>
                             </div>
                         </div>
